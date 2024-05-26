@@ -1,11 +1,11 @@
 import React from 'react'
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 
 import { supabaseServer } from '@/lib/supabase/server'
 import InitUser from '@/lib/store/InitUser'
 
 import ChatHeader from '@/components/ChatHeader'
+import ChatInput from '@/components/ChatInput'
 
 export default async function Page() {
   const supabase = supabaseServer()
@@ -36,9 +36,7 @@ export default async function Page() {
             })}
           </div>
         </div>
-        <div className='p-5 '>
-          <Input placeholder='send message' />
-        </div>
+        <ChatInput />
       </div>
     </div>
 
