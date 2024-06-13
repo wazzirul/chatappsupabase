@@ -1,4 +1,4 @@
-import { Imessage } from '@/lib/store/messages'
+import { Imessage, useMessage } from '@/lib/store/messages'
 import React from 'react'
 import Image from 'next/image'
 import { Ellipsis } from 'lucide-react';
@@ -27,7 +27,7 @@ export default function Message({ message }: { message: Imessage }) {
             <h1 className='font-bold'>{message.users?.display_name!}</h1>
             <h1 className='text-sm text-gray-400'>{new Date(message.created_at).toDateString()}</h1>
           </div>
-          {  message.users?.id === user?.id && <MessageMenu /> }
+          {  message.users?.id === user?.id && <MessageMenu message={message} /> }
         </div>
         <p className='text-gray-300'>{message.text}</p>
       </div>
@@ -35,7 +35,8 @@ export default function Message({ message }: { message: Imessage }) {
   )
 }
 
-const MessageMenu = () => {
+const MessageMenu = ({message}:{message:Imessage}) => {
+  const setActionMessage = useMessage((state) => state.setActionMessage);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -44,8 +45,20 @@ const MessageMenu = () => {
       <DropdownMenuContent>
         <DropdownMenuLabel>Action</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Delete</DropdownMenuItem>
+        <DropdownMenuItem 
+        onClick={() => {
+          document.getElementById('triggerEdit')?.click()
+        }}
+        >
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem 
+        onClick={() => {
+          document.getElementById('triggerDelete')?.click()
+          setActionMessage(message);
+        }}>
+          Delete
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
