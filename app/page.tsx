@@ -7,6 +7,7 @@ import InitUser from '@/lib/store/InitUser'
 import ChatHeader from '@/components/ChatHeader'
 import ChatInput from '@/components/ChatInput'
 import ChatMessages from '@/components/ChatMessages'
+// import OpenAIComponent from '@/components/OpenAI'
 
 export default async function Page() {
   const supabase = supabaseServer()
@@ -24,6 +25,7 @@ export default async function Page() {
     </div>
 
     <InitUser user={data.session?.user} />
+    {/* <OpenAIComponent /> */}
     </>
   )
 }
