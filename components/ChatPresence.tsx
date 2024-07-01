@@ -16,7 +16,7 @@ export default function ChatPresence() {
         const userIds = []
         for (const id in channel.presenceState()) {
           // @ts-ignore
-          userIds.push(channel.presenceState()[id][0].user_id);
+          userIds.push(channel.presenceState()[id].user_id);
         }
 
         setOnlineUsers([...new Set(userIds)].length);
